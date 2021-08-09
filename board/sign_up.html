@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>회원가입</title>
+</head>
+<body>
+<h1>회원정보입력</h1>
+ <form action="sign_process.php" method="post">
+              <fieldset>
+    <legend>입력사항</legend>
+        <p><label for="uid">아이디 : </label><input type="text" name="uid" id="uid"><button type="button" onclick="checkid();"/>중복검사</button></p>
+        <p><label for="pwd">비밀번호 : </label><input type="password" name="pwd" id="pwd"></p>
+        <input type="submit" value="가입하기">
+         </fieldset>
+    </form>
+    <script type="text/javascript">
+           function checkid() {
+             var userid = document.getElementById("uid").value;
+               if(userid){ //userid변수에 입력한 아이디를 넣고, 만약 userid변수에 값이 있다면 팝업창과 GET방식을 이용하여 값을 보냅니다.
+              url = "check.php?uid="+userid;
+                     window.open(url,"chkid","width=300,height=100"); //window.open('팝업 주소', '팝업창 이름', '팝업창 설정');
+              }else{
+                     alert("아이디를 입력하세요");
+              }   
+           }
+    </script>
+</body>
+</html>
