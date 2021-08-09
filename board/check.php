@@ -19,6 +19,8 @@
 		echo $uid.'중복된 아이디입니다.';
 
     }
+	mysqli_close($conn);
+
 ?>
 <button type="button" onclick="window.close()">닫기</button>
 </body>
