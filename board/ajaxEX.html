@@ -1,0 +1,133 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+   pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+   <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<script>
+   
+   var isAvailableId = false;
+      
+   //중복확인
+   function checkUserId() {
+      
+      var f = document.frm;
+      
+      if (f.userId.value == '') {
+         alert("입력 아이디가 없습니다.");
+         frm.userId.focus();
+         return false;
+      }
+      
+      $.ajax({
+         url : '<c:url value="/checkUserId"/>',
+         data : {userId: f.userId.value},
+         dataType : 'json',
+         type : 'POST',
+         contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+         success : function(data) {
+            
+            if (data.isSuccess) {
+               isAvailableId = true;   
+            }
+            
+            alert(data.message);
+            
+         },
+         error : function(error) {
+            alert("에러가 발생했습니다. 관리자에게 문의하여 주세요.");
+         }
+      });
+      
+   }
+   
+   //회원가입
+   function signUp() {
+      
+      if (!isAvailableId) {
+         alert("아이디 중복확인 하세요.");
+         document.frm.userId.focus();
+         return;
+      }
+      
+      var formData = new FormData($("#frm")[0]);
+      
+      $.ajax({
+         url : '<c:url value="/addUser"/>',
+         data : formData,
+         dataType : 'json',
+         type : 'POST',
+         processData : false,
+         contentType : false,
+         success : function(data) {
+            
+            if (data.isSuccess) {
+               alert(data.message);
+               location.href = "<c:url value='/login'/>";
+            }
+         },
+         
+         error : function(error) {
+            alert("에러가 발생했습니다. 관리자에게 문의하여 주세요.");
+         }
+      });
+   }
+   
+   function changeUserInput() {
+      isAvailableId = false;
+   }
+   
+</script>
+
+   <form name="frm" id="frm" method="post">
+      <h1>회원가입</h1>
+      <div id="" class=" ">
+         <div class="">
+            <table>
+               <colgroup class="col_group">
+                  <col class="th">
+                  <col class="td">
+                  <col class="th">
+                  <col class="td">
+               </colgroup>
+         
+               <tbody>
+                  <tr>
+                     <th>아이디<span class=""></span></th>
+                     <td class="">
+                        <input type="text" name="userId" id="userId" value="" maxlength="20" onchange="changeUserInput()" >
+                        <button type="button" onclick="javascript:checkUserId();">중복확인</button>
+                     </td>
+                     <th>이름<span class=""></span></th>
+                     <td><input type="text" name="userNm" value=""></td>
+                  </tr>
+            
+                  <tr>
+                     <th>비밀번호<span class=""></span></th>
+                     <td><input type="password" name="password" id="password" value=""></td>
+                     <th>비밀번호확인<span class=""></span></th>
+                     <td><input type="password" name="rePassword" value=""></td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+   
+         <div class=" ">
+            <div class="">
+               <button type="button" class="c_gray" onclick="javascript:location.href='<c:url value="/login"/>'">취소</button>
+            </div>
+            <div class="">
+               <button type="button" class="c_blue" onclick="javascript:signUp();">가입신청</button>      
+            </div>
+         </div>
+   
+      </div>
+   </form>
+</html>
