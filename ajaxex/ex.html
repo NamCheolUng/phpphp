@@ -8,13 +8,33 @@
 </head>
 <body>
 <script>
+// 	function add() {
+	// 	$.ajax({
+	// 		url: "add.php",
+	// 		type: "post",
+	// 		data: $("form").serialize(),
+	// 	}).done(function(data) {
+	// 		alert(data);
+	// 	});
+	// }
+
 	function add() {
+		var num = $('#num').val();
 		$.ajax({
 			url: 'add.php',
-			type: 'post',
-			data: $('form').serialize(),
-		}).done(function(data) {
-			alert(data);
+			type: 'POST',
+			data: {number1:num},
+            dataType : 'json',
+            // contentType : 'application/json; charset=UTF-8', //Undefined array key "number1"
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function(data){
+           alert(data);
+           },
+           error: function(error) {
+           	// alert("에러입니다.");
+           	alert(error); //[object Object]
+           }
+	
 		});
 	}
 </script>
