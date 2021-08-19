@@ -1,3 +1,11 @@
+<?php
+session_start();
+echo $_SESSION['userId'].'님 환영합니다!';
+if(!isset($_SESSION['isLogin'])){
+    echo '회원만 접근 가능합니다.';
+    exit;  #안적어도됨
+} 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
