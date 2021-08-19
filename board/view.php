@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['isLogin'])){
+    echo '회원만 접근 가능합니다.!';
+    exit;
+} 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
