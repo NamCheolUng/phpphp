@@ -15,6 +15,7 @@ if(!isset($_SESSION['isLogin'])){
     <title>abc 게시판</title>
 </head>
 <body>
+    <p><a href="logout.php">로그아웃</a></p>
     <h1>게시판</h1>
     <h2>글 목록</h2>
     <ul>
@@ -26,7 +27,7 @@ if(!isset($_SESSION['isLogin'])){
             echo 'db에 접속했습니다.';
         }
         //msg_board 테이블에서 글 조회
-        $sql = "SELECT * FROM msg_board";
+        $sql = "SELECT * FROM msg_board ORDER BY number desc";
         $result = mysqli_query($conn,$sql);
         // $list = '';
         // ehco 값을 그대로 출력.
@@ -54,12 +55,12 @@ if(!isset($_SESSION['isLogin'])){
         <p><label for="search">키워드 : </label><input type="text" id="search" name="skey"></p>
                 <input type="submit" value="검색">
          </form>
-    <hr>
+    <!-- <hr>
     <h2>글 삭제</h2>
      <form action="delete.php" method = "post">
     <h3>삭제할 메시지 번호를 입력하세요.</h3>
     <p><label for="msgdel">번호 : </label><input type="text" id="msgdel" name="delnum"></p>
             <input type="submit" value="삭제">
-     </form>
+     </form> -->
 </body>
 </html>
