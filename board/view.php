@@ -65,8 +65,9 @@ if(!isset($_SESSION['isLogin'])){
      <div>
   <!-- <a href="update.php?number=<?=$row['number']?>">수정</a> -->
   <button type="button" onclick="location.href='update.php?number=<?=$row['number']?>'">수정</button>
+  <button type="button" onclick="location.href='insert_delete.php?number=<?=$row['number']?>'">삭제</button>
+    </div>
 
-     </div>
      <?php
   }
   mysqli_close($conn);
