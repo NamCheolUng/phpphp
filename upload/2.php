@@ -18,7 +18,7 @@
 // echo '자세한 디버깅 정보입니다.:';
 // print_r($_FILES);
 // print '</pre>';
-move_uploaded_file($_FILES['test']['tmp_name'],'./abcd'.$_FILES['test']['name']);
+move_uploaded_file($_FILES['test']['tmp_name'],'./abcd'.$_FILES['test']['name']); //abcd 폴더에 파일원래이름 그대로 저장
 ?>
 <!-- <img src="file/<?=$_FILES['userfile']['name']?>" /> -->
 </body>
